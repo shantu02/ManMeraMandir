@@ -6,13 +6,12 @@ import { GetRituals } from '@/app/api/supadatabase/GET';
 import { Spinner } from '@/components/ui/Spinner';
 import Payment from '@/components/Payment';
 
-// eslint-disable-next-line @next/next/no-async-client-component
-const Abhishek = () => {
 
+
+const Abhishek = () => {
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
     const [abhishek, setAbhishek] = useState("Select");
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [ritualId, setRitualId] = useState("");
     const [amount, setAmount] = useState("");
     const [slot, setSlot] = useState('');
