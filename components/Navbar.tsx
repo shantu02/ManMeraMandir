@@ -7,15 +7,21 @@ import {
     Navbar,
     NavbarBrand,
     NavbarCollapse,
-    NavbarToggle,
   } from "flowbite-react";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import Logout from "@/app/api/logout/action";
 
 export default function NavigationMenu() {
 
     const [active, setActive] = useState<string|null>(null);
+
+    const handleLogout = ()=>{
+        setActive(null);
+        console.log("coming here")
+        Logout();
+    }
 
     return (
         <Navbar fluid rounded>
@@ -33,7 +39,7 @@ export default function NavigationMenu() {
                     <Link href={"/abhishek"}> Abhishek </Link>
                 </DropdownItem>
                 <DropdownItem className="bg-gray-100">
-                    <Link href={"/home"}> Signout </Link>
+                    <Link href={"#"} onClick={handleLogout}> Signout </Link>
                 </DropdownItem>
             </Dropdown>
 
@@ -45,7 +51,7 @@ export default function NavigationMenu() {
                 <Link href={"/abhishek"} className={active=="A"?"text-blue-500":"text-black"} onClick={()=>{setActive("A");}}>
                     Abhishek
                 </Link>
-                <Link href={"/home"} onClick={()=>{setActive(null);}}>
+                <Link href={"#"} onClick={handleLogout}>
                     Signout
                 </Link>
             </NavbarCollapse> 

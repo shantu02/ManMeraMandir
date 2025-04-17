@@ -28,6 +28,7 @@ export async function login(credentials:Credentials) {
         return {success:true};
     }
     catch(e){
+        console.log(e);
         return {error: "Server connnection error. Please check internet connection!!!"}
     }
 }
