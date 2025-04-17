@@ -1,14 +1,12 @@
 'use client'
 
 import { useState } from "react";
-import { Button } from "./ui/button";
+import ButtonComponent from "./ui/Button";
 import { AbhishekSubmitRequest, DonationSubmitRequest } from "@/app/api/supadatabase/POST";
 import { Badge, Checkbox, TabItem, Tabs } from "flowbite-react";
 import Image from "next/image";
-import ImageToIcon from "./ImageToIcon";
 import { FaMoneyBillWave } from 'react-icons/fa';
 import { MdQrCode } from 'react-icons/md';
-import Link from "next/link";
 
 
 
@@ -53,6 +51,7 @@ const Payment: React.FC<PaymentProps> = ({ name, mobile, amount, ritualId, slot,
         return;
     }
     
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleUPIPayment = () => {
         setPayMode("upi");
         setShowGif(true);
@@ -100,30 +99,23 @@ const Payment: React.FC<PaymentProps> = ({ name, mobile, amount, ritualId, slot,
                                 <Checkbox className="h-10 w-10" onChange={()=>{setCheckBox(!checkBox)}} />
                             </div>
                             <div className="my-2">
-                                {
-                                    checkBox &&
-                                        <Button className="flex-shrink-0 bg-purple-600 text-white text-base font-semibold py-2 px-5 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-                                        onClick={handleCashPayment}
-                                        >
-                                            Submit Donation
-                                        </Button>
-                                }
+                                { checkBox && <ButtonComponent onClick={handleCashPayment} text={PaymentFor=='D' ? "Submit Donation" : "Book Abhishek"} /> }
                             </div>
                         </>
                         :
-                        showGif
-                        ?
-                        <>
-                            <Image src={"/greenTick.gif"} width={100} height={100} alt="Payment Success" />
-                            <Button className="w-fit hover:cursor-pointer text-xl bg-green-600 text-white" onClick={handleDonePayment}> Done </Button>
-                        </>
-                        :
-                        <>
-                            <Badge color="warning" className="text-xl">
-                                <div className="my-2">Please Enter Name and Amount {PaymentFor=='A'&&"and Slot"} for donation!!!</div>
-                                <div className="my-2">If adding number, It should be 10 digit number!!!</div>
-                            </Badge>
-                        </>
+                            showGif
+                            ?
+                            <>
+                                <Image src={"/greenTick.gif"} width={100} height={100} alt="Payment Success" />
+                                <ButtonComponent onClick={handleDonePayment} text={"Done"} />
+                            </>
+                            :
+                            <>
+                                <Badge color="warning" className="text-xl">
+                                    <div className="my-2">Please Enter Name and Amount {PaymentFor=='A'&&"and Slot"} for donation!!!</div>
+                                    <div className="my-2">If adding number, It should be 10 digit number!!!</div>
+                                </Badge>
+                            </>
                     }
                 </div>
             </TabItem>

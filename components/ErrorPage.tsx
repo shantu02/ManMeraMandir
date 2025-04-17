@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from "@/components/ui/button";
+import ButtonComponent from "@/components/ui/Button";
 import { ErrorType } from "@/types/error_type";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,9 +33,7 @@ export default function ErrorPage(error:ErrorType){
             <div className="text-xl px-2 py-3 text-center"> {error.message}</div>
             <div className="my-2 px-2 py-1">
                 <Link href={"/home"} onClick={handleClick}>
-                    <Button>
-                        {"Go to HomePage"}
-                    </Button>
+                    <ButtonComponent text={"Go to Homepage"} />
                 </Link>
             </div>
             { loading && <Spinner size="medium" show={true}>Loading...</Spinner> }

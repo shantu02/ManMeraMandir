@@ -1,11 +1,10 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 'use client'
 
-import { Button } from "@/components/ui/button";
 import { login } from "../api/login/action";
 import { useState } from "react";
 import { Spinner } from "@/components/ui/Spinner";
 import { redirect } from "next/navigation";
+import ButtonComponent from "@/components/ui/Button";
 
 const LoginPage = () => {
     
@@ -51,11 +50,7 @@ const LoginPage = () => {
                     }
                     
                     <div className="flex items-center justify-center">
-                        <Button className="flex-shrink-0 bg-purple-600 text-white text-base font-semibold py-2 px-5 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-                            onClick={handleSubmit}
-                        >
-                            Sign up
-                        </Button>
+                        <ButtonComponent onClick={handleSubmit} text="Log In" />
                     </div>
                 </div>
             </div>
