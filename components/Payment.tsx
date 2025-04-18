@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonComponent from "./ui/Button";
 import { AbhishekSubmitRequest, DonationSubmitRequest } from "@/app/api/supadatabase/POST";
 import { Badge, Checkbox, TabItem, Tabs } from "flowbite-react";
 import Image from "next/image";
 import { FaMoneyBillWave } from 'react-icons/fa';
 import { MdQrCode } from 'react-icons/md';
+import BadgeComponent from "./ui/Badge";
 
 
 
@@ -30,6 +31,14 @@ const Payment: React.FC<PaymentProps> = ({ name, mobile, amount, ritualId, slot,
     const [payMode, setPayMode] = useState("");
     const [checkBox, setCheckBox] = useState(false);
     const [showGif, setShowGif] = useState(false);
+    const [error, setError] = useState(true);
+
+    useEffect(()=>{
+        if(name.length==0){setError(true);}
+        if(mobile.length==0 || mobile.length!=10){setError(true);}
+        if(amount.length==0 || parseInt(amount)<=0){setError(true);}
+        if(slot.length==0){setError(true);}
+    },[name, amount, mobile, slot])
 
     const handlePayment = async () =>{
         if(PaymentFor=='D'){
@@ -70,58 +79,60 @@ const Payment: React.FC<PaymentProps> = ({ name, mobile, amount, ritualId, slot,
         setCheckBox(false);
         setShowGif(false);
     }
-    
-    const performChecks = () => {
-        let check = name && amount && !showGif && (mobile=="" || mobile=="0" || mobile.length==10);
-        if(PaymentFor=='A'){
-            check = check && slot.length>1;
-        }
-        return check;
-    }
 
+    // if(error){
+    //     return(
+    //         <>
+    //             <Tabs aria-label="Payment Tabs" variant="underline" className="md:w-[50%]">
+    //                 <TabItem title={"CASH"} icon={FaMoneyBillWave}>
+    //                     <div>Please Check: &nbsp;</div>
+    //                     <BadgeComponent text={"Name"} color="warning" />
+    //                     <BadgeComponent text={"Mobile"} color="warning" />
+    //                     <BadgeComponent text={"Amount"} color="warning" />
+    //                     <BadgeComponent text={"DateTime"} color="warning" />
+    //                 </TabItem>
+    //                 <TabItem title={"UPI"} icon={MdQrCode}>
+    //                     <div>Please Enter Valid: &nbsp;</div>
+    //                     <BadgeComponent text={"Name"} color="warning" />
+    //                     <BadgeComponent text={"Mobile"} color="warning" />
+    //                     <BadgeComponent text={"Amount"} color="warning" />
+    //                     <BadgeComponent text={"DateTime"} color="warning" />
+    //                 </TabItem>
+    //             </Tabs>
+    //         </>
+    //     )
+    // }
 
     return (
-
-        <Tabs aria-label="Payment Tabs" variant="underline" className="md:w-[75%]">
+        <Tabs aria-label="Payment Tabs" variant="underline" className="md:w-[50%]">
             <TabItem title={"CASH"} icon={FaMoneyBillWave}>
                 <div className="flex flex-col items-center justify-center">
-                    <div className="text-center text-xl">CASH</div>
+                    <div className="text-center text-xl">
+                        CASH
+                    </div>
+                    <div className="flex flex-col w-fit p-2 text-md">
+                        {name && <div className="my-1 p-2"> Name : <span className="text-center bg-gray-300 rounded p-1"> {name} </span> </div>}
+                        {amount && <div className="my-1 p-2"> Money: <span className="text-center bg-gray-300 rounded p-1">{amount}</span> </div>}
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Badge color={checkBox?"success":"warning"} className="text-lg"> Cash Received? </Badge>
+                        <Checkbox className="h-10 w-10" onChange={()=>{setCheckBox(!checkBox)}} />
+                    </div>
+                    <div className="my-2">
+                        { checkBox && <ButtonComponent onClick={handleCashPayment} text={PaymentFor=='D' ? "Submit Donation" : "Book Abhishek"} /> }
+                    </div>
                     {
-                        performChecks()
-                        ?
-                        <>
-                            <div className="flex flex-col w-fit p-2 text-md">
-                                {name && <div className="my-1 p-2"> Name : <span className="text-center bg-gray-300 rounded p-1"> {name} </span> </div>}
-                                {amount && <div className="my-1 p-2"> Money: <span className="text-center bg-gray-300 rounded p-1">{amount}</span> </div>}
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Badge color={checkBox?"success":"warning"} className="text-lg"> Cash Received? </Badge>
-                                <Checkbox className="h-10 w-10" onChange={()=>{setCheckBox(!checkBox)}} />
-                            </div>
-                            <div className="my-2">
-                                { checkBox && <ButtonComponent onClick={handleCashPayment} text={PaymentFor=='D' ? "Submit Donation" : "Book Abhishek"} /> }
-                            </div>
-                        </>
-                        :
-                            showGif
-                            ?
-                            <>
-                                <Image src={"/greenTick.gif"} width={100} height={100} alt="Payment Success" />
-                                <ButtonComponent onClick={handleDonePayment} text={"Done"} />
-                            </>
-                            :
-                            <>
-                                <Badge color="warning" className="text-xl">
-                                    <div className="my-2">Please Enter Name and Amount {PaymentFor=='A'&&"and Slot"} for donation!!!</div>
-                                    <div className="my-2">If adding number, It should be 10 digit number!!!</div>
-                                </Badge>
-                            </>
+                    showGif &&
+                    <>
+                        <Image src={"/greenTick.gif"} width={100} height={100} alt="Payment Success" />
+                        <ButtonComponent onClick={handleDonePayment} text={"Done"} />
+                    </>
                     }
-                </div>
+            </div>
             </TabItem>
-            <TabItem title={"UPI"} icon={MdQrCode}>
+            <TabItem title={"QR Pay"} icon={MdQrCode}>
                 <div>
-                    <div className="text-center text-lg">UPI</div>
+                    <div className="text-center text-lg">QR Pay</div>
 
                 </div>
             </TabItem>

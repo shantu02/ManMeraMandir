@@ -39,6 +39,9 @@ export default function NavigationMenu() {
                     <Link href={"/abhishek"}> Abhishek </Link>
                 </DropdownItem>
                 <DropdownItem className="bg-gray-100">
+                    <Link href={"/home"}> Assest Donation </Link>
+                </DropdownItem>
+                <DropdownItem className="bg-gray-100">
                     <Link href={"#"} onClick={handleLogout}> Signout </Link>
                 </DropdownItem>
             </Dropdown>
@@ -50,6 +53,9 @@ export default function NavigationMenu() {
                 </Link>
                 <Link href={"/abhishek"} className={active=="A"?"text-blue-500":"text-black"} onClick={()=>{setActive("A");}}>
                     Abhishek
+                </Link>
+                <Link href={"/assestdonation"} className={active=="AD"?"text-blue-500":"text-black"} onClick={()=>{setActive("AD");}}>
+                    Assest Donation
                 </Link>
                 <Link href={"#"} onClick={handleLogout}>
                     Signout

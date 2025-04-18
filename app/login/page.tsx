@@ -5,6 +5,8 @@ import { useState } from "react";
 import { Spinner } from "@/components/ui/Spinner";
 import { redirect } from "next/navigation";
 import ButtonComponent from "@/components/ui/Button";
+import FloatingLabelComponent from "@/components/ui/FloatingLabel";
+import FormConatinerComponent from "@/components/ui/FormContainer";
 
 const LoginPage = () => {
     
@@ -28,36 +30,23 @@ const LoginPage = () => {
     }
 
     return(
-        <div className="h-screen flex items-center justify-center">
-            <div id="loginDiv" className="rounded-t-xl overflow-hidden bg-gradient-to-r from-purple-50 to-purple-100 p-10">
-                <div className="flex-row w-full max-w-sm mx-auto space-x-4">
-                    <div className="my-3">
-                        <label htmlFor="email" className="text-purple-800">Enter email:</label>
-                        <input id="email" value={email} className="flex-1 appearance-none border border-transparent w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-md rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="email" placeholder="Enter Username" 
-                            onChange={(e)=>{setEmail(e.target.value)}}
-                        />
-                    </div>
-                    <div className="my-3">
-                        <label htmlFor="password" className="text-purple-800">Enter Password:</label>
-                        <input id="password" value={password} className="flex-1 appearance-none border border-transparent w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-md rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="password" placeholder="Enter Password" 
-                            onChange={(e)=>{setPassword(e.target.value)}}
-                        />
-                    </div>
-                    {error && 
-                        <div className="text-red-500 text-center py-3">
-                            {error}
-                        </div>
-                    }
-                    
-                    <div className="flex items-center justify-center">
-                        <ButtonComponent onClick={handleSubmit} text="Log In" />
-                    </div>
+        <FormConatinerComponent>
+            <FloatingLabelComponent className="z-0" label={"Email"}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setEmail(e.target.value)}
+            />
+            <FloatingLabelComponent type="password" className="z-0" label={"Password"}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setPassword(e.target.value)}
+            />
+            {error && 
+                <div className="relative text-red-500 text-center py-3">
+                    {error}
                 </div>
+            }
+            <div className="flex justify-center">
+                <ButtonComponent className="text-lg" text={"Log in"} onClick={handleSubmit} />
             </div>
-
-            { loading && <Spinner size="medium" show={true}>Loading...</Spinner> }
-            
-        </div>
+            {loading && <Spinner />}
+        </FormConatinerComponent>
     )
 }
 
