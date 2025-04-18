@@ -46,7 +46,6 @@ export default function NavigationMenu() {
                 </DropdownItem>
             </Dropdown>
 
-            {/* <NavbarToggle />*/}
             <NavbarCollapse>
                 <Link href={"/donation"} className={active=="D"?"text-blue-500":"text-black"} onClick={()=>{setActive("D");}}>
                     Donation

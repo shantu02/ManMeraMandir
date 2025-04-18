@@ -27,13 +27,6 @@ const AssestDonation = () => {
                 />
             </div>
         </PaymentDetailsContainer>
-        // <div className='top-20 w-full bg-gradient-to-b from-gray-50 to-gray-100'>
-        //     <div className="flex flex-col md:flex-row justify-between gap-2">
-        //         <div className='md:w-[50%]'>
-                    
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
 
