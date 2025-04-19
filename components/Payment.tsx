@@ -7,7 +7,6 @@ import { Badge, Checkbox, TabItem, Tabs } from "flowbite-react";
 import Image from "next/image";
 import { FaMoneyBillWave } from 'react-icons/fa';
 import { MdQrCode } from 'react-icons/md';
-import BadgeComponent from "./ui/Badge";
 
 
 
@@ -31,6 +30,7 @@ const Payment: React.FC<PaymentProps> = ({ name, mobile, amount, ritualId, slot,
     const [payMode, setPayMode] = useState("");
     const [checkBox, setCheckBox] = useState(false);
     const [showGif, setShowGif] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [error, setError] = useState(true);
 
     useEffect(()=>{
@@ -80,31 +80,8 @@ const Payment: React.FC<PaymentProps> = ({ name, mobile, amount, ritualId, slot,
         setShowGif(false);
     }
 
-    // if(error){
-    //     return(
-    //         <>
-    //             <Tabs aria-label="Payment Tabs" variant="underline" className="md:w-[50%]">
-    //                 <TabItem title={"CASH"} icon={FaMoneyBillWave}>
-    //                     <div>Please Check: &nbsp;</div>
-    //                     <BadgeComponent text={"Name"} color="warning" />
-    //                     <BadgeComponent text={"Mobile"} color="warning" />
-    //                     <BadgeComponent text={"Amount"} color="warning" />
-    //                     <BadgeComponent text={"DateTime"} color="warning" />
-    //                 </TabItem>
-    //                 <TabItem title={"UPI"} icon={MdQrCode}>
-    //                     <div>Please Enter Valid: &nbsp;</div>
-    //                     <BadgeComponent text={"Name"} color="warning" />
-    //                     <BadgeComponent text={"Mobile"} color="warning" />
-    //                     <BadgeComponent text={"Amount"} color="warning" />
-    //                     <BadgeComponent text={"DateTime"} color="warning" />
-    //                 </TabItem>
-    //             </Tabs>
-    //         </>
-    //     )
-    // }
-
     return (
-        <Tabs aria-label="Payment Tabs" variant="underline" className="md:w-[50%]">
+        <Tabs aria-label="Payment Tabs" variant="underline">
             <TabItem title={"CASH"} icon={FaMoneyBillWave}>
                 <div className="flex flex-col items-center justify-center">
                     <div className="text-center text-xl">
