@@ -1,13 +1,13 @@
 'use client'
 
-import ButtonComponent from "./ui/Button";
+import ButtonComponent from "@/components/ui/Button";
 // import ButtonComponent from "./ui/Button";
 import { ErrorType } from "@/types/error_type";
 // import { ErrorType } from "../types/error_type";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Spinner } from "./ui/Spinner";
+import { Spinner } from "@/components/ui/Spinner";
 
 
 export default function ErrorPage(error:ErrorType){

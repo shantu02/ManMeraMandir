@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import ButtonComponent from "./ui/Button";
+import ButtonComponent from "@/components/ui/Button";
 import { AbhishekSubmitRequest, DonationSubmitRequest } from "@/app/api/supadatabase/POST";
 // import { AbhishekSubmitRequest, DonationSubmitRequest } from "../app/api/supadatabase/POST";
 import { Badge, Checkbox, TabItem, Tabs } from "flowbite-react";
