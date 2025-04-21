@@ -1,7 +1,7 @@
 'use client'
 
-import ButtonComponent from "@/components/ui/Button";
-// import ButtonComponent from "./ui/Button";
+import ButtonComponent from "@/components/ui/ButtonComponent";
+// import ButtonComponent from "./ui/ButtonComponent";
 import { ErrorType } from "@/types/error_type";
 // import { ErrorType } from "../types/error_type";
 import Link from "next/link";

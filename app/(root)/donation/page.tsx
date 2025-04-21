@@ -2,7 +2,7 @@
 
 // import Payment from '../../../components/Payment';
 import Payment from '@/components/Payment';
-import ButtonComponent from '@/components/ui/Button';
+import ButtonComponent from '@/components/ui/ButtonComponent';
 import FloatingLabelComponent from '@/components/ui/FloatingLabel';
 import PaymentDetailsContainer from '@/components/ui/PaymentDetailsContainer';
 import { Dropdown, DropdownItem } from 'flowbite-react';

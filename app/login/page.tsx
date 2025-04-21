@@ -5,7 +5,7 @@ import { login } from "@/app/api/login/action";
 import { useState } from "react";
 import { Spinner } from "@/components/ui/Spinner";
 import { redirect } from "next/navigation";
-import ButtonComponent from "@/components/ui/Button";
+import ButtonComponent from "@/components/ui/ButtonComponent";
 import FloatingLabelComponent from "@/components/ui/FloatingLabel";
 import FormConatinerComponent from "@/components/ui/FormContainer";
 // import FormConatinerComponent from "../../components/ui/FormContainer";
