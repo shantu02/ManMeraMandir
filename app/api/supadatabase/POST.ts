@@ -1,6 +1,6 @@
 'use server'
 
-import { createClient } from "@/utils/supabase/server"
+import { createClient } from "../../../utils/supabase/server"
 import { AbhisheksInsert, AbhishekSubmitType, Donations, DonationsInsert, DonationSubmitType, Rituals } from "./databasesMaps";
 
 

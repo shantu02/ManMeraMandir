@@ -1,5 +1,5 @@
 
-import ErrorPage from "@/components/ErrorPage"
+import ErrorPage from "../components/ErrorPage"
 
 const NotFound = () => {
     return (
