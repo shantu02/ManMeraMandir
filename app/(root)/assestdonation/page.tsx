@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from "react";
-// import PaymentDetailsContainer from "../../../components/ui/PaymentDetailsContainer";
 import PaymentDetailsContainer from "@/components/ui/PaymentDetailsContainer";
 import FloatingLabelComponent from "@/components/ui/FloatingLabel";
 import { Textarea } from "flowbite-react";

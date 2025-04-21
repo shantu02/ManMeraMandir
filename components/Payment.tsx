@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import ButtonComponent from "@/components/ui/ButtonComponent";
 import { AbhishekSubmitRequest, DonationSubmitRequest } from "@/app/api/supadatabase/POST";
-// import { AbhishekSubmitRequest, DonationSubmitRequest } from "../app/api/supadatabase/POST";
 import { Badge, Checkbox, TabItem, Tabs } from "flowbite-react";
 import Image from "next/image";
 import { FaMoneyBillWave } from 'react-icons/fa';

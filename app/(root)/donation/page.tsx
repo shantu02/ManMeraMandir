@@ -1,6 +1,5 @@
 'use client'
 
-// import Payment from '../../../components/Payment';
 import Payment from '@/components/Payment';
 import ButtonComponent from '@/components/ui/ButtonComponent';
 import FloatingLabelComponent from '@/components/ui/FloatingLabel';
