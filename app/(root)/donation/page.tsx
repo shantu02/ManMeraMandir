@@ -1,9 +1,10 @@
 'use client'
 
-import Payment from '../../../components/Payment';
-import ButtonComponent from '../../../components/ui/Button';
-import FloatingLabelComponent from '../../../components/ui/FloatingLabel';
-import PaymentDetailsContainer from '../../../components/ui/PaymentDetailsContainer';
+// import Payment from '../../../components/Payment';
+import Payment from '@/components/Payment';
+import ButtonComponent from '@/components/ui/Button';
+import FloatingLabelComponent from '@/components/ui/FloatingLabel';
+import PaymentDetailsContainer from '@/components/ui/PaymentDetailsContainer';
 import { Dropdown, DropdownItem } from 'flowbite-react';
 import {useEffect, useState} from 'react';
 

@@ -5,7 +5,8 @@ import Payment from '@/components/Payment';
 import PaymentDetailsContainer from '@/components/ui/PaymentDetailsContainer';
 import FloatingLabelComponent from '@/components/ui/FloatingLabel';
 import DateTimePickerComponent from '@/components/ui/DateTimePicker';
-import ButtonComponent from '../../../components/ui/Button';
+import ButtonComponent from '@/components/ui/Button';
+// import ButtonComponent from '../../../components/ui/Button';
 
 
 

@@ -11,7 +11,8 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
-import Logout from "../app/api/logout/action";
+import Logout from "@/app/api/logout/action";
+// import Logout from "../app/api/logout/action";
 
 export default function NavigationMenu() {
 

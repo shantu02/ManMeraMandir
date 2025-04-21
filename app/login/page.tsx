@@ -1,12 +1,14 @@
 'use client'
 
-import { login } from "../api/login/action";
+// import { login } from "../api/login/action";
+import { login } from "@/app/api/login/action";
 import { useState } from "react";
-import { Spinner } from "../../components/ui/Spinner";
+import { Spinner } from "@/components/ui/Spinner";
 import { redirect } from "next/navigation";
-import ButtonComponent from "../../components/ui/Button";
-import FloatingLabelComponent from "../../components/ui/FloatingLabel";
-import FormConatinerComponent from "../../components/ui/FormContainer";
+import ButtonComponent from "@/components/ui/Button";
+import FloatingLabelComponent from "@/components/ui/FloatingLabel";
+import FormConatinerComponent from "@/components/ui/FormContainer";
+// import FormConatinerComponent from "../../components/ui/FormContainer";
 
 const LoginPage = () => {
     

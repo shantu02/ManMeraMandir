@@ -1,6 +1,7 @@
 'use server'
 
-import { createClient } from '../../../utils/supabase/server'
+import { createClient } from '@/utils/supabase/server'
+// import { createClient } from '../../../utils/supabase/server'
 import { AuthRetryableFetchError } from '@supabase/supabase-js';
 
 
