@@ -29,9 +29,9 @@ const Donation = () => {
                 <div className='md:w-[50%]'>
                     <PaymentDetailsContainer heading={"Donar Details"} halfScreen={true}>
                         <FloatingLabelComponent type='text' label="Enter name" value={name} 
-                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setName(e.target.value); setCheckout(false);}} />
+                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setName(e.target.value); handleCheck();}} />
                         <FloatingLabelComponent type='number' label="Enter mobile" value={mobile} 
-                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setMobile(e.target.value); setCheckout(false);}} />
+                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setMobile(e.target.value); handleCheck();}} />
                         <div className="flex col-1">
                             <FloatingLabelComponent type='number' label="Enter amount" value={amount}
                                 onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setAmount(e.target.value);}} />

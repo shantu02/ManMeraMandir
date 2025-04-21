@@ -17,6 +17,7 @@ const DateTimePickerComponent = ({setDateTime}:{setDateTime:(value:string)=>void
     return(
         <div className="flex flex-row md:flex-col items-center">
             <Datepicker className="w-fit"
+                showClearButton={false}
                 minDate={new Date()}
                 onChange={(e)=>{setDate(e!);}}
             />

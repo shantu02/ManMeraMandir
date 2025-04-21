@@ -90,6 +90,7 @@ const Payment: React.FC<PaymentProps> = ({ name, mobile, amount, ritualId, slot,
                     <div className="flex flex-col w-fit p-2 text-md">
                         {name && <div className="my-1 p-2"> Name : <span className="text-center bg-gray-300 rounded p-1"> {name} </span> </div>}
                         {amount && <div className="my-1 p-2"> Money: <span className="text-center bg-gray-300 rounded p-1">{amount}</span> </div>}
+                        {slot && <div className="my-1 p-2"> Slot: <span className="text-center bg-gray-300 rounded p-1">{slot}</span> </div>}
                     </div>
                     <div className="flex items-center gap-2">
                         <Badge color={checkBox?"success":"warning"} className="text-lg"> Cash Received? </Badge>
@@ -98,12 +99,11 @@ const Payment: React.FC<PaymentProps> = ({ name, mobile, amount, ritualId, slot,
                     <div className="my-2">
                         { checkBox && <ButtonComponent onClick={handleCashPayment} text={PaymentFor=='D' ? "Submit Donation" : "Book Abhishek"} /> }
                     </div>
-                    {
-                    showGif &&
-                    <>
-                        <Image src={"/greenTick.gif"} width={100} height={100} alt="Payment Success" />
-                        <ButtonComponent onClick={handleDonePayment} text={"Done"} />
-                    </>
+                    { showGif &&
+                        <>
+                            <Image src={"/greenTick.gif"} width={100} height={100} alt="Payment Success" />
+                            <ButtonComponent onClick={handleDonePayment} text={"Done"} />
+                        </>
                     }
             </div>
             </TabItem>
