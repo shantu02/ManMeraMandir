@@ -5,29 +5,25 @@ import ButtonComponent from "@/components/ui/ButtonComponent";
 import { ErrorType } from "@/types/error_type";
 // import { ErrorType } from "../types/error_type";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Spinner } from "@/components/ui/Spinner";
 
 
-export default function ErrorPage(error:ErrorType){
+interface ErrorPageProps {
+  error: ErrorType;
+}
 
-    const router = useRouter();
+export default function ErrorPage({error}:ErrorPageProps){
+
+    const pathName = usePathname();
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleClick = () => setLoading(true);
     
       useEffect(() => {
-        const handleComplete = () => setLoading(false);
-    
-        router.events?.on('routeChangeComplete', handleComplete);
-        router.events?.on('routeChangeError', handleComplete);
-    
-        return () => {
-          router.events?.off('routeChangeComplete', handleComplete);
-          router.events?.off('routeChangeError', handleComplete);
-        };
-      }, [router]);
+        setLoading(false);
+      }, [pathName]);
 
     return(
         <div className="h-screen flex flex-col items-center justify-center bg-blue-100">
