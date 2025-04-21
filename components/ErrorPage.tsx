@@ -5,7 +5,7 @@ import ButtonComponent from "@/components/ui/ButtonComponent";
 import { ErrorType } from "@/types/error_type";
 // import { ErrorType } from "../types/error_type";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Spinner } from "@/components/ui/Spinner";
 
