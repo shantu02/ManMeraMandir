@@ -39,7 +39,7 @@ export default function NavigationMenu() {
                     <Link href={"/abhishek"}> Abhishek </Link>
                 </DropdownItem>
                 <DropdownItem className="bg-gray-100">
-                    <Link href={"/home"}> Assest Donation </Link>
+                    <Link href={"/assestdonation"}> Assest Donation </Link>
                 </DropdownItem>
                 <DropdownItem className="bg-gray-100">
                     <Link href={"#"} onClick={handleLogout}> Signout </Link>
