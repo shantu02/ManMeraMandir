@@ -1,6 +1,7 @@
 export const Donations = "donations";
 export const Rituals = "rituals";
 export const RitualsInfo = "rituals_info";
+export const AssestsDonations = "assestsdonations";
 
 export interface DonationSubmitType{
     name: string,
@@ -13,12 +14,17 @@ export interface DonationSubmitType{
 export interface AbhishekSubmitType{
     name: string,
     mobile: string,
-    ritualId: string,
-    amount: string,
     slot: string,
     payMode:string
     transactionId:string,
 }
+
+export interface AssestDonationSubmitType{
+    name: string,
+    mobile: string,
+    description: string,
+}
+
 
 export function DonationsInsert(donationItem:DonationSubmitType){
     const {name, mobile, amount, payMode, transactionId} = donationItem;
@@ -27,28 +33,33 @@ export function DonationsInsert(donationItem:DonationSubmitType){
             name: name,
             mobile: mobile,
             pay_amount : amount,
-            pay_mode: payMode.toLowerCase(),
+            pay_mode: payMode,
             transaction_id: transactionId
         }
     ];
 }
 
 export function AbhisheksInsert(abhishekItem:AbhishekSubmitType){
-    const {name, mobile, ritualId, amount, slot, payMode, transactionId} = abhishekItem;
-    let custom = false;
-    if(ritualId=="-" || ritualId=="" || ritualId==null){
-        custom=true;
-    }
+    const {name, mobile, slot, payMode, transactionId} = abhishekItem;
     return [
         {
             "name": name,
             "mobile": mobile,
-            "ritual_type": parseInt(ritualId, 10),
-            "is_custom": custom,
-            "custom_amount" : amount,
+            "ritual_type": 1,
             "ritual_slot" : slot,
             "pay_mode": payMode.toLowerCase(),
             "transaction_id": transactionId
+        }
+    ];
+}
+
+export function AssestsDonationInsert(assestItem:AssestDonationSubmitType){
+    const {name, mobile, description} = assestItem;
+    return [
+        {
+            "name":name,
+            "mobile":mobile,
+            "description":description.replaceAll('\n', ', ')
         }
     ];
 }
