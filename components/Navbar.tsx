@@ -46,7 +46,7 @@ export default  function NavigationMenu() {
                     admin &&
                     <Dropdown label="Admin" dismissOnClick={true} className="bg-gray-100 text-gray-700 focus:bg-white hover:bg-white hover:cursor-pointer p-4 ms-0 flex justify-start w-full">
                         <DropdownItem className="bg-gray-100">
-                            <Link href={"/record-info"}> Data Point </Link>
+                            <Link href={"/data-info"}> Data Point </Link>
                         </DropdownItem>
                     </Dropdown>
                 }
@@ -69,7 +69,7 @@ export default  function NavigationMenu() {
                     admin && 
                     <Dropdown label="Admin" dismissOnClick={true} className="bg-white text-black focus:bg-white hover:bg-white hover:cursor-pointer p-0 ms-0">
                         <DropdownItem className="bg-gray-100">
-                            <Link href={"/record-info"}> Data Point </Link>
+                            <Link href={"/data-info"}> Data Point </Link>
                         </DropdownItem>
                     </Dropdown>
                 }
