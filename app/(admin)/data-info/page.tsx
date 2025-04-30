@@ -21,7 +21,7 @@ interface DonationDataType{
 }
 
 
-export function DonationInfo() {
+const DonationInfo = () => {
 
     const[loading, setLoading] = useState(true);
     const [dCheck, setDCheck] = useState(true);
