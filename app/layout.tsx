@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Poppins  } from "next/font/google";
 import "../styles/globals.css";
+import { UserProvider } from "@/context/UserRoleProvider";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -27,7 +28,9 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased`}
       >
-        {children}
+        <UserProvider>
+          {children}
+        </UserProvider>
       </body>
     </html>
   );

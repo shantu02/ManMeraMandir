@@ -1,6 +1,6 @@
 import Image from "next/image";
-import BadgeComponent from "./Badge";
-import ButtonComponent from "./ButtonComponent";
+import BadgeComponent from "../ui/Badge";
+import ButtonComponent from "../ui/ButtonComponent";
 
 
 interface PaymentProcessingProps {

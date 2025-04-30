@@ -17,14 +17,13 @@ export async function login(credentials:Credentials) {
         const { error } = await supabase.auth.signInWithPassword(credentials);
         
         if(error){
-            console.log("error is ", error);
             return (error instanceof AuthRetryableFetchError || error.code == "ENOTFOUND") 
                     ? {error: "Server connnection error. Please check internet connection!!!"}
                     : (error.code == "invalid_credentials")
                         ? {error: "Invalid Credentials!!!"}
                         : {error: "Unexpected Error!!!"} 
         }
-        
+
         return {success:true};
     }
     catch(e){

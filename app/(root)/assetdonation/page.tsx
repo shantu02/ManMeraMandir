@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from "react";
-import PaymentDetailsContainer from "@/components/ui/PaymentDetailsContainer";
+import PaymentDetailsContainer from "@/components/Payments/PaymentDetailsContainer";
 import FloatingLabelComponent from "@/components/ui/FloatingLabel";
 import { Textarea } from "flowbite-react";
 import ButtonComponent from "@/components/ui/ButtonComponent";
 import { AsssetDonationSubmitRequest } from "@/app/api/supadatabase/POST";
-import PaymentProcessing from "@/components/ui/PaymentProcessing";
+import PaymentProcessing from "@/components/Payments/PaymentProcessing";
 import ValidateFormValues from "@/utils/helper/validateFormValues";
 import BadgeComponent from "@/components/ui/Badge";
 

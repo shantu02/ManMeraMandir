@@ -1,0 +1,82 @@
+'use client'
+
+import { Checkbox, Datepicker, Dropdown, DropdownItem } from "flowbite-react";
+// import { useState } from "react";
+import ButtonComponent from "../ui/ButtonComponent";
+import { useEffect, useState } from "react";
+
+interface DataFilters{
+    startDate: Date,
+    endDate: Date,
+    mode: string,
+    aCheck: boolean,
+    dCheck: boolean,
+    adCheck: boolean,
+    setStartDate: (v:Date)=>void,
+    setEndDate: (v:Date)=>void,
+    setMode: (v:string)=>void,
+    setDCheck: (v:boolean)=>void,
+    setACheck: (v:boolean)=>void,
+    setADCheck: (v:boolean)=>void,
+    handleFilterMethod: ()=>void,
+}
+
+
+const DataFilters = ({aCheck, dCheck, adCheck, startDate, endDate, mode, setACheck, setDCheck, setADCheck, setStartDate, setEndDate, setMode, handleFilterMethod}:DataFilters) => {
+
+    const [showModeToggle, setShowModeToggle] = useState(aCheck || dCheck);
+    useEffect(()=>{
+        setShowModeToggle(aCheck || dCheck);
+    },[aCheck, dCheck])
+    
+    return (
+        <div className="m-10">
+            <div className="flex flex-col md:flex-row gap-2 justify-end items-center text-sm px-5">
+                <span>Date Range:</span>
+                <Datepicker value={startDate} onChange={(e)=>{setStartDate(e!)}} showClearButton={false} maxDate={endDate} />
+                <span>from</span>
+                <Datepicker value={endDate} onChange={(e)=>{setEndDate(e!)}} showClearButton={false} minDate={startDate} />
+            </div>
+
+            <div className="flex flex-col md:flex-row items-center justify-between m-5">
+                <div className="flex flex-col md:flex-row items-center gap-2">
+                    <Dropdown label="Select Data Sources" dismissOnClick={false} className="text-sm text-nowrap">
+                        <DropdownItem onClick={() => {if(aCheck || adCheck){setDCheck(!dCheck)}}}>
+                            <Checkbox checked={dCheck} readOnly className="p-2" /> 
+                            <span className="p-2">Donations</span>
+                        </DropdownItem>
+                        <DropdownItem onClick={() => {if(dCheck || adCheck){setACheck(!aCheck)}}}>
+                            <Checkbox checked={aCheck} readOnly className="p-2" /> 
+                            <span className="p-2">Abhisheks</span>
+                        </DropdownItem>
+                        {mode=='any' && <DropdownItem onClick={() => {if(aCheck || dCheck){setADCheck(!adCheck)}}}>
+                            <Checkbox checked={adCheck} readOnly className="p-2" /> 
+                            <span className="p-2">Assest Donations</span>
+                        </DropdownItem>}
+                    </Dropdown>
+
+                    <div className={`flex gap-2 items-center m-2 ${(showModeToggle) ? "visible" : "invisible"}`}> 
+                        <Dropdown label={mode.toUpperCase()} dismissOnClick={false} className="text-sm text-nowrap" color={"alternative"}>
+                            <DropdownItem onClick={() => setMode('cash')}>
+                                <Checkbox checked={mode=='cash'} readOnly className="p-2" /> 
+                                <span className="p-2">CASH</span>
+                            </DropdownItem>
+                            <DropdownItem onClick={() => setMode('upi')}>
+                                <Checkbox checked={mode=='upi'} readOnly className="p-2" /> 
+                                <span className="p-2">UPI</span>
+                            </DropdownItem>
+                            <DropdownItem onClick={() => setMode('any')}>
+                                <Checkbox checked={mode=='any'} readOnly className="p-2" /> 
+                                <span className="p-2">ANY</span>
+                            </DropdownItem>
+                        </Dropdown>
+                    </div>
+                </div>
+
+                <ButtonComponent text={"Filter"} onClick={handleFilterMethod} />
+            </div>
+        </div>
+    )
+}
+
+export default DataFilters;

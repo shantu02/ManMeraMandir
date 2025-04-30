@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import ButtonComponent from "@/components/ui/ButtonComponent";
 import FloatingLabelComponent from "@/components/ui/FloatingLabel";
 import FormConatinerComponent from "@/components/ui/FormContainer";
+import { useUser } from "@/context/UserRoleProvider";
 
 const LoginPage = () => {
     
@@ -15,6 +16,8 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string|null>(null);
     const [loading, setLoading] = useState<boolean>(false);
+
+    const userRole = useUser();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -26,8 +29,9 @@ const LoginPage = () => {
         if(response.error){
             setError(response.error);
         }
+        await userRole.fetchUser();
         setLoading(false);
-        redirect("/home");
+        redirect("/");
     }
 
     return(

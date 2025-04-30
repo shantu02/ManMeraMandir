@@ -1,8 +1,10 @@
+
 import { redirect } from "next/navigation"
 
 
-const page = () => {
-    return (
+const page = async() => {
+
+    return(
         redirect("/home")
     )
 }

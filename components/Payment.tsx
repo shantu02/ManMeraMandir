@@ -6,7 +6,7 @@ import { AbhishekSubmitRequest, DonationSubmitRequest } from "@/app/api/supadata
 import { Badge, Checkbox, TabItem, Tabs } from "flowbite-react";
 import { FaMoneyBillWave } from 'react-icons/fa';
 import { MdQrCode } from 'react-icons/md';
-import PaymentProcessing from "./ui/PaymentProcessing";
+import PaymentProcessing from "./Payments/PaymentProcessing";
 import ValidateFormValues from "@/utils/helper/validateFormValues";
 
 

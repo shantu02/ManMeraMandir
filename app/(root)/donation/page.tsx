@@ -4,7 +4,7 @@ import Payment from '@/components/Payment';
 import BadgeComponent from '@/components/ui/Badge';
 import ButtonComponent from '@/components/ui/ButtonComponent';
 import FloatingLabelComponent from '@/components/ui/FloatingLabel';
-import PaymentDetailsContainer from '@/components/ui/PaymentDetailsContainer';
+import PaymentDetailsContainer from '@/components/Payments/PaymentDetailsContainer';
 import ValidateFormValues from '@/utils/helper/validateFormValues';
 import { Dropdown, DropdownItem } from 'flowbite-react';
 import {useEffect, useState} from 'react';
