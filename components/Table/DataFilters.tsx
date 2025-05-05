@@ -1,9 +1,10 @@
 'use client'
 
-import { Checkbox, Datepicker, Dropdown, DropdownItem } from "flowbite-react";
+import { Checkbox, Dropdown, DropdownItem } from "flowbite-react";
 // import { useState } from "react";
 import ButtonComponent from "../ui/ButtonComponent";
 import { useEffect, useState } from "react";
+import DateRange from "../Common/DateRange";
 
 interface DataFilters{
     startDate: Date,
@@ -31,13 +32,7 @@ const DataFilters = ({aCheck, dCheck, adCheck, startDate, endDate, mode, setAChe
     
     return (
         <div className="m-10">
-            <div className="flex flex-col md:flex-row gap-2 justify-end items-center text-sm px-5">
-                <span>Date Range:</span>
-                <Datepicker value={startDate} onChange={(e)=>{setStartDate(e!)}} showClearButton={false} maxDate={endDate} />
-                <span>from</span>
-                <Datepicker value={endDate} onChange={(e)=>{setEndDate(e!)}} showClearButton={false} minDate={startDate} />
-            </div>
-
+            <DateRange startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} />
             <div className="flex flex-col md:flex-row items-center justify-between m-5">
                 <div className="flex flex-col md:flex-row items-center gap-2">
                     <Dropdown label="Select Data Sources" dismissOnClick={false} className="text-sm text-nowrap">

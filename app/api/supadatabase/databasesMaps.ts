@@ -2,6 +2,8 @@ export const Donations = "donations";
 export const Rituals = "rituals";
 export const RitualsInfo = "rituals_info";
 export const AssestsDonations = "assestsdonations";
+export const Pandits = "pandits";
+export const BusinessPeople = "business_people";
 
 export interface DonationSubmitType{
     name: string,
@@ -23,6 +25,21 @@ export interface AssestDonationSubmitType{
     name: string,
     mobile: string,
     description: string,
+}
+
+export interface PanditSubmitType{
+    name: string,
+    mobile: string,
+    adhaar: string,
+}
+
+export interface BusinessPersonSubmitType{
+    name: string,
+    mobile: string,
+    adhaar: string,
+    businessName: string,
+    businessAddress: string,
+    personType: string
 }
 
 
@@ -62,4 +79,29 @@ export function AssestsDonationInsert(assestItem:AssestDonationSubmitType){
             "description":description.replaceAll('\n', ', ')
         }
     ];
+}
+
+export function PanditInsert(panditItem:PanditSubmitType){
+    const {name, mobile, adhaar} = panditItem;
+    return [
+        {
+            "name":name,
+            "mobile":mobile,
+            "adhaar":adhaar,
+        }
+    ]
+}
+
+export function BusinessPersonInsert(businessPersonItem:BusinessPersonSubmitType){
+    const {name, mobile, adhaar, businessName, businessAddress, personType} = businessPersonItem;
+    return [
+        {
+            "name":name,
+            "mobile":mobile,
+            "adhaar":adhaar,
+            "business_name":personType=="vendor" ? businessName : "",
+            "business_address":personType=="vendor" ? businessAddress : "",
+            "person_type":personType,
+        }
+    ]
 }

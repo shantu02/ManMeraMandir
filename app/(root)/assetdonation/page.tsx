@@ -7,8 +7,9 @@ import { Textarea } from "flowbite-react";
 import ButtonComponent from "@/components/ui/ButtonComponent";
 import { AsssetDonationSubmitRequest } from "@/app/api/supadatabase/POST";
 import PaymentProcessing from "@/components/Payments/PaymentProcessing";
-import ValidateFormValues from "@/utils/helper/validateFormValues";
+import {ValidateFormValues} from "@/utils/helper/validateFormValues";
 import BadgeComponent from "@/components/ui/Badge";
+import MobileNumber from "@/components/Common/MobileNumber";
 
 const AssestDonation = () => {
     
@@ -42,12 +43,11 @@ const AssestDonation = () => {
                 {!showProcess
                     ?
                     <>
-                        <FloatingLabelComponent type='text' label="Enter name" value={name} 
+                        <FloatingLabelComponent type='text' label="Enter name" required={true} value={name} 
                             onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setName(e.target.value); }} />
-                        <FloatingLabelComponent type='number' label="Enter mobile" value={mobile} 
-                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setMobile(e.target.value);}} />
+                        <MobileNumber mobileNumber={mobile} setMobileNumber={setMobile} />
                         <div className="flex flex-col gap-2 items-center justify-center">
-                            <label> Assest Description: </label>
+                            <label> <span className="font-bold text-gray-500"> Assest Description *</span> </label>
                             <Textarea className="text-sm md:text-lg" value={description}
                                 rows={5} placeholder="Enter assest details"
                                 onChange={(e)=>{setDescription(e.target.value)}}

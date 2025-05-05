@@ -29,7 +29,7 @@ export default  function NavigationMenu() {
             <NavbarBrand href="/home">
                 {/* <img src="/om.png" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" /> */}
                 <Image src={"/om.png"} height={40} width={40} alt={"ॐ"}/>
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Man Mera Mandir</span>
+                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">MMM</span>
             </NavbarBrand>
 
             <Dropdown label="Services" dismissOnClick={true} className="md:hidden bg-white text-black focus:bg-white hover:bg-white hover:cursor-pointer">
@@ -44,9 +44,12 @@ export default  function NavigationMenu() {
                 </DropdownItem>
                 {
                     admin &&
-                    <Dropdown label="Admin" dismissOnClick={true} className="bg-gray-100 text-gray-700 focus:bg-white hover:bg-white hover:cursor-pointer p-4 ms-0 flex justify-start w-full">
+                    <Dropdown label="Analytics" dismissOnClick={true} className="bg-gray-100 text-gray-700 focus:bg-white hover:bg-white hover:cursor-pointer p-4 ms-0 flex justify-start w-full">
                         <DropdownItem className="bg-gray-100">
-                            <Link href={"/data-info"}> Data Point </Link>
+                            <Link href={"/donations-rituals"}> Donation & Rituals </Link>
+                        </DropdownItem>
+                        <DropdownItem className="bg-gray-100">
+                            <Link href={"/register-person"}> Add Person </Link>
                         </DropdownItem>
                     </Dropdown>
                 }
@@ -67,9 +70,12 @@ export default  function NavigationMenu() {
                 </Link>
                 { 
                     admin && 
-                    <Dropdown label="Admin" dismissOnClick={true} className="bg-white text-black focus:bg-white hover:bg-white hover:cursor-pointer p-0 ms-0">
-                        <DropdownItem className="bg-gray-100">
-                            <Link href={"/data-info"}> Data Point </Link>
+                    <Dropdown label="Analytics" dismissOnClick={true} className="bg-white text-black focus:bg-white hover:bg-white hover:cursor-pointer p-0 ms-0">
+                        <DropdownItem className="bg-gray-100 p-2">
+                            <Link href={"/donations-rituals"}> Donations & Rituals </Link>
+                        </DropdownItem>
+                        <DropdownItem className="bg-gray-100 p-2">
+                            <Link href={"/register-person"}> Register Person </Link>
                         </DropdownItem>
                     </Dropdown>
                 }

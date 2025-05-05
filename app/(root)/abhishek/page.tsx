@@ -6,8 +6,9 @@ import PaymentDetailsContainer from '@/components/Payments/PaymentDetailsContain
 import FloatingLabelComponent from '@/components/ui/FloatingLabel';
 import DateTimePickerComponent from '@/components/ui/DateTimePicker';
 import ButtonComponent from '@/components/ui/ButtonComponent';
-import ValidateFormValues from '@/utils/helper/validateFormValues';
+import {ValidateFormValues} from '@/utils/helper/validateFormValues';
 import BadgeComponent from '@/components/ui/Badge';
+import MobileNumber from '@/components/Common/MobileNumber';
 
 
 
@@ -35,14 +36,12 @@ const Abhishek = () => {
             <div className="flex flex-col md:flex-row justify-between gap-2">
                 <div className='md:w-[50%]'>
                     <PaymentDetailsContainer heading={"Abhishek"} halfScreen={true}>
-                        <FloatingLabelComponent type={"text"} label={"Enter name"} value={name}
+                        <FloatingLabelComponent type={"text"} label={"Enter name"} required={true} value={name}
                             onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setName(e.target.value)}
                         />
-                        <FloatingLabelComponent type={"number"} label={"Enter mobile"} value={mobile}
-                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setMobile(e.target.value)}
-                        />
+                        <MobileNumber mobileNumber={mobile} setMobileNumber={setMobile} />
                         <div className="flex flex-col items-center justify-center">
-                            <label> Slot (Date Time): </label>
+                            <label> <span className="font-bold text-gray-500">Slot (Date Time) *</span> </label>
                             <DateTimePickerComponent setDateTime={setSlot}/>
                         </div>
                         {error && <span className='flex justify-center'> <BadgeComponent text={"Please Enter Valid Values"} color={"danger"} onlySmall={true} /> </span> }

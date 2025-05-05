@@ -1,7 +1,8 @@
 'use server'
 
 import { createClient } from "@/utils/supabase/server"
-import { AbhisheksInsert, AbhishekSubmitType, AssestDonationSubmitType, AssestsDonationInsert, AssestsDonations, Donations, DonationsInsert, DonationSubmitType, Rituals } from "./databasesMaps";
+import { AbhisheksInsert, AbhishekSubmitType, AssestDonationSubmitType, AssestsDonationInsert, AssestsDonations, BusinessPeople, BusinessPersonInsert, BusinessPersonSubmitType, Donations, DonationsInsert, DonationSubmitType, PanditInsert, Pandits, PanditSubmitType, Rituals } from "./databasesMaps";
+import { GetAdhaarDuplicateCheck } from "./GET";
 
 
 
@@ -26,3 +27,22 @@ export async function AsssetDonationSubmitRequest(assestItem:AssestDonationSubmi
     console.log("Assest Donation Submit Request result : ", result);
     return result;
 };
+
+export async function PanditSubmitRequest(panditItem:PanditSubmitType){
+    const supabase = await createClient();
+    const result = await supabase.from(Pandits).insert(PanditInsert(panditItem));
+    console.log("Pandit Submit Request result : ", result);
+    return result;
+}
+
+export async function BusinessPeopleSubmitRequest(bpItem:BusinessPersonSubmitType){
+    const supabase = await createClient();
+    if(bpItem.adhaar!=""){
+        const adhaarCheck = await GetAdhaarDuplicateCheck(bpItem.adhaar);
+        if(adhaarCheck){return {status: 409};}
+    }
+    const result = await supabase.from(BusinessPeople).insert(BusinessPersonInsert(bpItem));
+    console.log("Business Person Submit Request result : ", result);
+    return result;
+    // return {status:201};
+}

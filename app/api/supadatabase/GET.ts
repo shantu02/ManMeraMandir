@@ -1,7 +1,7 @@
 'use server'
 
 import { createClient } from "@/utils/supabase/server";
-import { AssestsDonations, Donations, Rituals, RitualsInfo } from "./databasesMaps";
+import { AssestsDonations, BusinessPeople, Donations, Rituals, RitualsInfo } from "./databasesMaps";
 
 
 export async function GetRituals(){
@@ -103,5 +103,14 @@ export async function GetAllDonationsForDateRange(startDate:Date, endDate:Date){
         throw error; // need to handle it
     }
     return donationsForDateRange;
+}
+
+export async function GetAdhaarDuplicateCheck(adhaar:string){
+    const supabase = await createClient();
+    const {data: adhaarData, error} = await supabase.from(BusinessPeople).select("adhaar").eq("adhaar", adhaar).limit(1);
+    if(error){
+        throw error; // need to handle it
+    }
+    return adhaarData.length > 0;
 }
 

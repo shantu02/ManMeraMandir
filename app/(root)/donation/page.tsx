@@ -5,9 +5,10 @@ import BadgeComponent from '@/components/ui/Badge';
 import ButtonComponent from '@/components/ui/ButtonComponent';
 import FloatingLabelComponent from '@/components/ui/FloatingLabel';
 import PaymentDetailsContainer from '@/components/Payments/PaymentDetailsContainer';
-import ValidateFormValues from '@/utils/helper/validateFormValues';
+import {ValidateFormValues} from '@/utils/helper/validateFormValues';
 import { Dropdown, DropdownItem } from 'flowbite-react';
 import {useEffect, useState} from 'react';
+import MobileNumber from '@/components/Common/MobileNumber';
 
 
 const Donation = () => {
@@ -34,12 +35,11 @@ const Donation = () => {
             <div className="flex flex-col md:flex-row justify-between gap-2">
                 <div className='md:w-[50%]'>
                     <PaymentDetailsContainer heading={"Donar Details"} halfScreen={true}>
-                        <FloatingLabelComponent type='text' label="Enter name" value={name} 
+                        <FloatingLabelComponent type='text' label={"Enter Name"} required={true} value={name} 
                             onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setName(e.target.value)} />
-                        <FloatingLabelComponent type='number' label="Enter mobile" value={mobile} 
-                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setMobile(e.target.value)} />
+                        <MobileNumber mobileNumber={mobile} setMobileNumber={setMobile} />
                         <div className="flex col-1">
-                            <FloatingLabelComponent type='number' label="Enter amount" value={amount}
+                            <FloatingLabelComponent type='number' label="Enter amount" required={true} value={amount}
                                 onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setAmount(e.target.value);}} />
                             <Dropdown label="" dismissOnClick={true} className='w-fit'>
                                 <DropdownItem onClick={()=>setAmount("101")}>Rs. 101</DropdownItem>

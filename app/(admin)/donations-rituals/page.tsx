@@ -7,7 +7,7 @@ import DateTimeOptions from "@/utils/DateTimeFormat/utilDateTimeFormat";
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
 import { useEffect, useState } from "react";
 
-interface DonationDataType{
+interface DonationsRitualsType{
     _id: bigint,
     name: string,
     created_at: Date,
@@ -21,7 +21,7 @@ interface DonationDataType{
 }
 
 
-const DonationInfo = () => {
+const DonationsRituals = () => {
 
     const[loading, setLoading] = useState(true);
     const [dCheck, setDCheck] = useState(true);
@@ -33,7 +33,7 @@ const DonationInfo = () => {
     const [startDate, setStartDate] = useState<Date>(new Date(today.getFullYear(), today.getMonth(), 1));
     const [endDate, setEndDate] = useState<Date>(new Date(today.getFullYear(), today.getMonth()+1, 0));
 
-    const[data, setData] = useState<Array<DonationDataType>>();
+    const[data, setData] = useState<Array<DonationsRitualsType>>();
 
     useEffect(()=>{
         const fetchDonations = async() => {
@@ -117,4 +117,4 @@ const DonationInfo = () => {
     );
 }
 
-export default DonationInfo; 
+export default DonationsRituals; 
