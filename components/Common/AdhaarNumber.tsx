@@ -1,5 +1,5 @@
 'use client'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import FloatingLabelComponent from '../ui/FloatingLabel';
 
 const AdhaarNumber = (
@@ -13,6 +13,12 @@ const AdhaarNumber = (
     const [adhaar01, setAdhaar01]  = useState(adhaarNumber[0]);
     const [adhaar02, setAdhaar02]  = useState(adhaarNumber[1]);
     const [adhaar03, setAdhaar03]  = useState(adhaarNumber[2]);
+
+    useEffect(()=>{
+        setAdhaar01(adhaarNumber[0]);
+        setAdhaar02(adhaarNumber[1]);
+        setAdhaar03(adhaarNumber[2]);
+    },[adhaarNumber]);
 
     const adhaarInputCheck = (v:string) => {
         return (v=="" || (parseInt(v)>0 && v.length<=4));
