@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
+import { GetAllVendors } from "@/app/api/supadatabase/GET";
 import { BusinessPeopleSubmitRequest, PanditSubmitRequest } from "@/app/api/supadatabase/POST";
 import AdhaarNumber from "@/components/Common/AdhaarNumber";
 import MobileNumber from "@/components/Common/MobileNumber";
@@ -8,9 +9,18 @@ import RecordProcessing from "@/components/Common/RecordProcessing";
 import BadgeComponent from "@/components/ui/Badge";
 import ButtonComponent from "@/components/ui/ButtonComponent";
 import FloatingLabelComponent from "@/components/ui/FloatingLabel";
+import { Spinner } from "@/components/ui/Spinner";
 import { ValidatePersonAddFormValues } from "@/utils/helper/validateFormValues";
 import { Checkbox, Dropdown, DropdownItem, Textarea } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+
+
+interface VendorType{
+    _id: bigint,
+    created_at: Date,
+    vendor: string
+}
 
 
 const RegisterPerson = () => {
@@ -25,7 +35,37 @@ const RegisterPerson = () => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
 
+    const [vendors, setVendors] = useState<Array<VendorType>>();
+    const [pageInitiating, setPageInitiating]= useState(true);
 
+    const [search, setSearch] = useState("");
+    const [searchFilters, setSearchFilters] = useState<Array<VendorType>>();
+
+    useEffect(()=>{
+        const getVendors = async()=>{
+            setPageInitiating(true);
+            const vendorsData = await GetAllVendors();
+            setVendors(vendorsData);
+            setSearchFilters(vendorsData);
+            setPageInitiating(false);
+        };
+        getVendors();
+    },[]);
+
+    useEffect(()=>{
+        if(search==""){
+            setSearchFilters(vendors);
+        }
+        else{
+            const filters = vendors?.filter((item)=>item?.vendor.toLowerCase().includes(search.toLowerCase()));
+            setSearchFilters(filters);
+        }
+    },[search, vendors]);
+
+    const handleAddBusinessType = () =>{
+
+    }
+    
     const handleTryAgain = () => {
         setPending(false);
         setSuccess(false);
@@ -97,15 +137,27 @@ const RegisterPerson = () => {
                     <>
                         <div className="flex flex-col gap-2 items-center justify-center">
                             <label> <span className="font-bold text-gray-500"> Business Type * </span> </label>
-                            <Textarea className="text-sm md:text-lg" value={businessName}
+                            {/* <Textarea className="text-sm md:text-lg" value={businessName}
                                 rows={1} placeholder="Enter business type"
                                 onChange={(e)=>{setBusinessName(e.target.value)}}
-                            />
+                            /> */}
+                            <Dropdown label={businessName=="" ? "Select" : businessName} dismissOnClick={true} placement="right" >
+                                <div onClick={()=>{}}>
+                                    <input type="text" onKeyDown={(e) => e.stopPropagation()} onChange={(e)=>setSearch(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-3 m-3" placeholder="Search" />
+                                </div>
+                                {
+                                    searchFilters && searchFilters?.length>0 
+                                    ? searchFilters?.map((item, index)=>(
+                                        <DropdownItem key={index} className="px-3" onClick={()=>setBusinessName(item?.vendor)}> {item?.vendor} </DropdownItem>
+                                    ))
+                                    : <DropdownItem className="relative w-full flex justify-center" onClick={handleAddBusinessType}> <span className="p-3">Add new Item</span> </DropdownItem>
+                                }
+                            </Dropdown>
                         </div>
                         <div className="flex flex-col gap-2 items-center justify-center">
                             <label> <span className="font-bold text-gray-500"> Business Address * </span> </label>
                             <Textarea className="text-sm md:text-lg" value={businessAddress}
-                                rows={5} placeholder="Enter business details"
+                                rows={5} placeholder="Enter business address"
                                 onChange={(e)=>{setBusinessAddress(e.target.value)}}
                             />
                         </div>
@@ -117,6 +169,8 @@ const RegisterPerson = () => {
                     : <ButtonComponent text={"Add Person"} onClick={handleRegisterPerson} />
                 }
             </div>
+
+            {pageInitiating && <Spinner />}
         </div>
     )
 }

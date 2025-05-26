@@ -1,7 +1,7 @@
 'use server'
 
 import { createClient } from "@/utils/supabase/server";
-import { AssestsDonations, BusinessPeople, Donations, Rituals, RitualsInfo } from "./databasesMaps";
+import { AssestsDonations, BusinessPeople, Donations, Rituals, RitualsInfo, Vendors } from "./databasesMaps";
 
 
 export async function GetRituals(){
@@ -112,5 +112,23 @@ export async function GetAdhaarDuplicateCheck(adhaar:string){
         throw error; // need to handle it
     }
     return adhaarData.length > 0;
+}
+
+export async function GetVendorDuplicateCheck(vendor:string){
+    const supabase = await createClient();
+    const {data: vendorData, error} = await supabase.from(Vendors).select("vendor").eq("adhaar", vendor).limit(1);
+    if(error){
+        throw error; // need to handle it
+    }
+    return vendorData.length > 0;
+}
+
+export async function GetAllVendors(){
+    const supabase = await createClient();
+    const {data: vendors, error} = await supabase.from(Vendors).select("*");
+    if(error){
+        throw error; // need to handle it
+    }
+    return vendors;
 }
 

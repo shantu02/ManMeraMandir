@@ -4,6 +4,7 @@ export const RitualsInfo = "rituals_info";
 export const AssestsDonations = "assestsdonations";
 export const Pandits = "pandits";
 export const BusinessPeople = "business_people";
+export const Vendors = "vendors";
 
 export interface DonationSubmitType{
     name: string,
@@ -104,4 +105,8 @@ export function BusinessPersonInsert(businessPersonItem:BusinessPersonSubmitType
             "person_type":personType,
         }
     ]
+}
+
+export function VendorInsert(vendorItem:string){
+    return [ {"vendor": vendorItem} ]
 }

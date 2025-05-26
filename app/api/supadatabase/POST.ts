@@ -1,8 +1,8 @@
 'use server'
 
 import { createClient } from "@/utils/supabase/server"
-import { AbhisheksInsert, AbhishekSubmitType, AssestDonationSubmitType, AssestsDonationInsert, AssestsDonations, BusinessPeople, BusinessPersonInsert, BusinessPersonSubmitType, Donations, DonationsInsert, DonationSubmitType, PanditInsert, Pandits, PanditSubmitType, Rituals } from "./databasesMaps";
-import { GetAdhaarDuplicateCheck } from "./GET";
+import { AbhisheksInsert, AbhishekSubmitType, AssestDonationSubmitType, AssestsDonationInsert, AssestsDonations, BusinessPeople, BusinessPersonInsert, BusinessPersonSubmitType, Donations, DonationsInsert, DonationSubmitType, PanditInsert, Pandits, PanditSubmitType, Rituals, VendorInsert, Vendors } from "./databasesMaps";
+import { GetAdhaarDuplicateCheck, GetVendorDuplicateCheck } from "./GET";
 
 
 
@@ -44,5 +44,15 @@ export async function BusinessPeopleSubmitRequest(bpItem:BusinessPersonSubmitTyp
     const result = await supabase.from(BusinessPeople).insert(BusinessPersonInsert(bpItem));
     console.log("Business Person Submit Request result : ", result);
     return result;
-    // return {status:201};
+}
+
+export async function VendorSubmitRequest(vendor:string){
+    const supabase = await createClient();
+    const vendorCheck = await GetVendorDuplicateCheck(vendor);
+    if(vendorCheck){
+        return {status: 409};
+    }
+    const result = await supabase.from(Vendors).insert(VendorInsert(vendor));
+    console.log("Vendor Submit Request result : ", result);
+    return result;
 }
