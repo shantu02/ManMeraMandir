@@ -1,4 +1,4 @@
-export interface ErrorType{
+export type ErrorType = {
     code:number,
     message:string,
 }

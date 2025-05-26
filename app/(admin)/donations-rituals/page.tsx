@@ -3,22 +3,10 @@
 import { GetAllRecordsForCurrentMonth, GetAllRecordsForFilter } from "@/app/api/supadatabase/GET";
 import DataFilters from "@/components/Table/DataFilters";
 import { Spinner } from "@/components/ui/Spinner";
+import { DonationsRitualsType } from "@/types/donation_rituals_type";
 import DateTimeOptions from "@/utils/DateTimeFormat/utilDateTimeFormat";
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
 import { useEffect, useState } from "react";
-
-interface DonationsRitualsType{
-    _id: bigint,
-    name: string,
-    created_at: Date,
-    mobile: string,
-    pay_mode: string,
-    pay_amount: string,
-    transaction_id: string,
-    ritual_slot: Date,
-    description: string,
-    record_type: string,
-}
 
 
 const DonationsRituals = () => {
@@ -75,7 +63,7 @@ const DonationsRituals = () => {
     return (
         <div>
             <div className="px-10 m-5 text-xl"> RECORDS INFORMATION </div>
-            <DataFilters dCheck={dCheck} aCheck={aCheck} adCheck={adCheck} startDate={startDate} endDate={endDate} mode={mode} setACheck={setACheck} setDCheck={setDCheck} setADCheck={setADCheck} setStartDate={setStartDate} setEndDate={setEndDate} setMode={setMode} handleFilterMethod={handleFilterMethod} />
+            <DataFilters dCheck={dCheck} aCheck={aCheck} adCheck={adCheck} startDate={startDate} endDate={endDate} mode={mode} setACheck={setACheck} setDCheck={setDCheck} setADCheck={setADCheck} setStartDate={setStartDate} setEndDate={setEndDate} setMode={setMode} handleFilterMethod={handleFilterMethod} data={data} pageName={"Donations And Rituals Analytics Page"} />
             <div className="overflow-x-auto">
                 <Table hoverable={true} striped={true}>
                     <TableHead>

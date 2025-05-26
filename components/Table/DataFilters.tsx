@@ -5,6 +5,8 @@ import { Checkbox, Dropdown, DropdownItem } from "flowbite-react";
 import ButtonComponent from "../ui/ButtonComponent";
 import { useEffect, useState } from "react";
 import DateRange from "../Common/DateRange";
+import { ExportUnionTypes } from "@/types/export_type_unions";
+import DataExport from "../Common/DataExport";
 
 interface DataFilters{
     startDate: Date,
@@ -13,6 +15,8 @@ interface DataFilters{
     aCheck: boolean,
     dCheck: boolean,
     adCheck: boolean,
+    data: ExportUnionTypes[] | undefined,
+    pageName: string,
     setStartDate: (v:Date)=>void,
     setEndDate: (v:Date)=>void,
     setMode: (v:string)=>void,
@@ -23,12 +27,26 @@ interface DataFilters{
 }
 
 
-const DataFilters = ({aCheck, dCheck, adCheck, startDate, endDate, mode, setACheck, setDCheck, setADCheck, setStartDate, setEndDate, setMode, handleFilterMethod}:DataFilters) => {
+const DataFilters = ({aCheck, dCheck, adCheck, startDate, endDate, mode, data, pageName, setACheck, setDCheck, setADCheck, setStartDate, setEndDate, setMode, handleFilterMethod}:DataFilters) => {
 
     const [showModeToggle, setShowModeToggle] = useState(aCheck || dCheck);
     useEffect(()=>{
         setShowModeToggle(aCheck || dCheck);
     },[aCheck, dCheck])
+
+    const getDataSourceArray = () => {
+        const arr: string[] = [];
+        if(dCheck){
+            arr.push("Donations");
+        }
+        if(aCheck){
+            arr.push("Abhisheks");
+        }
+        if(adCheck){
+            arr.push("Assest Donations");
+        }
+        return arr;
+    }
     
     return (
         <div className="m-10">
@@ -67,8 +85,10 @@ const DataFilters = ({aCheck, dCheck, adCheck, startDate, endDate, mode, setAChe
                         </Dropdown>
                     </div>
                 </div>
-
-                <ButtonComponent text={"Filter"} onClick={handleFilterMethod} />
+                <div className="flex gap-4">
+                    <DataExport data={data} dataSourceArray={getDataSourceArray()} startDate={startDate} endDate={endDate} pageName={pageName} />
+                    <ButtonComponent text={"Filter"} onClick={handleFilterMethod} />
+                </div>
             </div>
         </div>
     )
