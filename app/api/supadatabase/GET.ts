@@ -116,11 +116,12 @@ export async function GetAdhaarDuplicateCheck(adhaar:string){
 
 export async function GetVendorDuplicateCheck(vendor:string){
     const supabase = await createClient();
-    const {data: vendorData, error} = await supabase.from(Vendors).select("vendor").eq("adhaar", vendor).limit(1);
+    const {data: vendorData, error} = await supabase.from(Vendors).select("vendor");
     if(error){
         throw error; // need to handle it
     }
-    return vendorData.length > 0;
+    const duplicateElement = vendorData?.find(element => element.vendor.toLowerCase() === vendor.toLowerCase());
+    return duplicateElement ? true : false;
 }
 
 export async function GetAllVendors(){

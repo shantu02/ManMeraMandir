@@ -6,21 +6,16 @@ import { BusinessPeopleSubmitRequest, PanditSubmitRequest } from "@/app/api/supa
 import AdhaarNumber from "@/components/Common/AdhaarNumber";
 import MobileNumber from "@/components/Common/MobileNumber";
 import RecordProcessing from "@/components/Common/RecordProcessing";
+import AddNewBusinessModal from "@/components/RegisterPerson/AddNewBusinessModal";
 import BadgeComponent from "@/components/ui/Badge";
 import ButtonComponent from "@/components/ui/ButtonComponent";
 import FloatingLabelComponent from "@/components/ui/FloatingLabel";
 import { Spinner } from "@/components/ui/Spinner";
+import { VendorType } from "@/types/vendor_type";
 import { ValidatePersonAddFormValues } from "@/utils/helper/validateFormValues";
-import { Checkbox, Dropdown, DropdownItem, Textarea } from "flowbite-react";
+import { Checkbox, Dropdown, DropdownDivider, DropdownItem, Textarea } from "flowbite-react";
 import { useEffect, useState } from "react";
 
-
-
-interface VendorType{
-    _id: bigint,
-    created_at: Date,
-    vendor: string
-}
 
 
 const RegisterPerson = () => {
@@ -40,6 +35,8 @@ const RegisterPerson = () => {
 
     const [search, setSearch] = useState("");
     const [searchFilters, setSearchFilters] = useState<Array<VendorType>>();
+
+    const [openModal, setOpenModal] = useState(false);
 
     useEffect(()=>{
         const getVendors = async()=>{
@@ -61,10 +58,6 @@ const RegisterPerson = () => {
             setSearchFilters(filters);
         }
     },[search, vendors]);
-
-    const handleAddBusinessType = () =>{
-
-    }
     
     const handleTryAgain = () => {
         setPending(false);
@@ -141,16 +134,21 @@ const RegisterPerson = () => {
                                 rows={1} placeholder="Enter business type"
                                 onChange={(e)=>{setBusinessName(e.target.value)}}
                             /> */}
-                            <Dropdown label={businessName=="" ? "Select" : businessName} dismissOnClick={true} placement="right" >
+                            <Dropdown label={businessName=="" ? "Select" : businessName} dismissOnClick={true}  >
                                 <div onClick={()=>{}}>
-                                    <input type="text" onKeyDown={(e) => e.stopPropagation()} onChange={(e)=>setSearch(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-3 m-3" placeholder="Search" />
+                                    <input type="text" value={search} onKeyDown={(e) => e.stopPropagation()} onChange={(e)=>setSearch(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-3 m-4" placeholder="Search" />
                                 </div>
+                                <DropdownDivider />
                                 {
                                     searchFilters && searchFilters?.length>0 
                                     ? searchFilters?.map((item, index)=>(
                                         <DropdownItem key={index} className="px-3" onClick={()=>setBusinessName(item?.vendor)}> {item?.vendor} </DropdownItem>
                                     ))
-                                    : <DropdownItem className="relative w-full flex justify-center" onClick={handleAddBusinessType}> <span className="p-3">Add new Item</span> </DropdownItem>
+                                    : <DropdownItem className="relative w-full flex justify-center" onClick={()=>setOpenModal(true)}> 
+                                        <span className="p-3">
+                                            <span className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add new Business Type</span>
+                                        </span> 
+                                    </DropdownItem>
                                 }
                             </Dropdown>
                         </div>
@@ -169,7 +167,7 @@ const RegisterPerson = () => {
                     : <ButtonComponent text={"Add Person"} onClick={handleRegisterPerson} />
                 }
             </div>
-
+            <AddNewBusinessModal openModal={openModal} setOpenModal={setOpenModal} vendors={vendors} />
             {pageInitiating && <Spinner />}
         </div>
     )
