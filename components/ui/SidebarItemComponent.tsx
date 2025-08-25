@@ -4,7 +4,6 @@ import CustomIconColor from "./CustomIconColor";
 
 
 const SidebarItemComponent = ({...props}) => {
-    const CustomIcon = props.icon ? CustomIconColor(props.icon, "text-white") : null;
     return(
         <SidebarItem
             icon={props.icon ? CustomIconColor(props.icon, "text-white") : undefined}
