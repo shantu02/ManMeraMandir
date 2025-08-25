@@ -9,7 +9,7 @@ const ButtonComponent = ({...props}) => {
                 value={props.value}
                 onClick={props.onClick}
                 onChange={props.onChange}
-                className={`${!props.exportBtn && "bg-indigo-600"} text-white px-6 py-3 rounded-lg transform transition duration-300 hover:-translate-y-1 hover:shadow-lg text-nowrap`}
+                className={`${!props.exportBtn && "bg-indigo-600"} text-white px-6 py-3 rounded-lg transform transition duration-300 hover:-translate-y-1 hover:shadow-lg text-nowrap ${props.className}`}
             > 
                 {props.text}
             </Button>

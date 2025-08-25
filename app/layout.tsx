@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Poppins  } from "next/font/google";
 import "../styles/globals.css";
 import { UserProvider } from "@/context/UserRoleProvider";
+import NavigationMenu from "@/components/Navbar";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.className} antialiased`}
+        className={`${poppins.className} antialiased h-screen`}
       >
         <UserProvider>
           {children}

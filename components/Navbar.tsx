@@ -2,17 +2,24 @@
 'use client'
 
 import {
-    Dropdown,
-    DropdownItem,
     Navbar,
     NavbarBrand,
-    NavbarCollapse,
+    Sidebar,
+    SidebarCollapse,
+    SidebarItemGroup,
+    SidebarItems,
   } from "flowbite-react";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import Logout from "@/app/api/logout/action";
 import { useUser } from "@/context/UserRoleProvider";
+import { HiArrowSmLeft, HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser } from "react-icons/hi";
+import CustomIconColor from "./ui/CustomIconColor";
+import SidebarItemComponent from "./ui/SidebarItemComponent";
+import CustomNavDropdown from "./ui/CustomNavDropdown";
+import CustomNavDropdownItem from "./ui/CustomNavDropdownItem";
+import ButtonComponent from "./ui/ButtonComponent";
 
 export default  function NavigationMenu() {
 
@@ -25,64 +32,73 @@ export default  function NavigationMenu() {
     }
 
     return (
-        <Navbar fluid rounded>
-            <NavbarBrand href="/home">
-                {/* <img src="/om.png" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" /> */}
+        <Navbar className="bg-cyan-800 sm:px-1 z-2">
+              
+            <NavbarBrand href="/home" as={Link}>
                 <Image src={"/om.png"} height={40} width={40} alt={"ॐ"}/>
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">MMM</span>
+                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white hidden md:block">MMM</span>
             </NavbarBrand>
 
-            <Dropdown label="Services" dismissOnClick={true} className="md:hidden bg-white text-black focus:bg-white hover:bg-white hover:cursor-pointer">
-                <DropdownItem className="bg-gray-100">
-                    <Link href={"/donation"}> Donation </Link>
-                </DropdownItem>
-                <DropdownItem className="bg-gray-100">
-                    <Link href={"/abhishek"}> Abhishek </Link>
-                </DropdownItem>
-                <DropdownItem className="bg-gray-100">
-                    <Link href={"/assetdonation"}> Asset Donation </Link>
-                </DropdownItem>
+            <div className="hidden md:block">
+                <Sidebar aria-label="Sidebar with multi-level dropdown example"
+                    theme={{root:{inner:"bg-cyan-800"}}} className="w-fit"
+                >
+                    <SidebarItems className="bg-cyan-800">
+                        <SidebarItemGroup>
+                            <SidebarItemComponent icon={HiInbox} href={"/donation"} text={"Donation"} />
+                            <SidebarItemComponent icon={HiInbox} href={"/abhishek"} text={"Abhishek"} />
+                            <SidebarItemComponent icon={HiUser} href={"/assetdonation"} text={"Asset Donation"} />
+                        </SidebarItemGroup>
+                        <SidebarItemGroup>
+                            {
+                                admin &&
+                                <>
+                                    <SidebarCollapse icon={CustomIconColor(HiChartPie,"text-white")} className="text-white hover:bg-gray-800 px-2 text-sm md:text-base" label="Analytics">
+                                        <SidebarItemComponent href={"/donations-rituals"} text={"> Donations & Rituals"} />
+                                        <SidebarItemComponent href={"/register-person"} text={"> Add Person"} />
+                                    </SidebarCollapse>
+                                    <SidebarCollapse icon={CustomIconColor(HiShoppingBag,"text-white")} className="text-white hover:bg-gray-800 px-2 text-sm md:text-base" label="Finance">
+                                        <SidebarItemComponent href={"/donations-rituals"} text={"> Utility Bills"} />
+                                        <SidebarItemComponent href={"/donations-rituals"} text={"> Vendor Bills"} />
+                                        <SidebarItemComponent href={"/donations-rituals"} text={"> Salaries"} />
+                                    </SidebarCollapse>
+                                </>
+                            }
+                        </SidebarItemGroup>
+                        <SidebarItemGroup>
+                            <SidebarItemComponent icon={HiArrowSmLeft} href={"#"} text={"Signout"} onClick={handleLogout} />
+                        </SidebarItemGroup>
+                    </SidebarItems>
+                </Sidebar>
+            </div>
+
+            <div className="md:hidden flex items-center">
+
+                <CustomNavDropdown label={"Services"}>
+                    <CustomNavDropdownItem label="Donation" href="/donation" />
+                    <CustomNavDropdownItem label="Abhishek" href="/abhishek" />
+                    <CustomNavDropdownItem label="Asset Donation" href="/assetdonation" />
+                </CustomNavDropdown>
+
                 {
                     admin &&
-                    <Dropdown label="Analytics" dismissOnClick={true} className="bg-gray-100 text-gray-700 focus:bg-white hover:bg-white hover:cursor-pointer p-4 ms-0 flex justify-start w-full">
-                        <DropdownItem className="bg-gray-100">
-                            <Link href={"/donations-rituals"}> Donation & Rituals </Link>
-                        </DropdownItem>
-                        <DropdownItem className="bg-gray-100">
-                            <Link href={"/register-person"}> Add Person </Link>
-                        </DropdownItem>
-                    </Dropdown>
-                }
-                <DropdownItem className="bg-gray-100">
-                    <Link href={"#"} onClick={handleLogout}> Signout </Link>
-                </DropdownItem>
-            </Dropdown>
+                    <CustomNavDropdown label="Admin">
+                        <CustomNavDropdown label="Analytics" childDropdown={true}>
+                            <CustomNavDropdownItem label="Donations & Rituals" href="/donations-rituals" />
+                            <CustomNavDropdownItem label="Add Person" href="/register-person" />
+                        </CustomNavDropdown>
 
-            <NavbarCollapse>
-                <Link href={"/donation"} className={`${active=="D"?"text-blue-500":"text-black"} flex items-center`} onClick={()=>{setActive("D");}}>
-                    Donation
-                </Link>
-                <Link href={"/abhishek"} className={`${active=="A"?"text-blue-500":"text-black"} flex items-center`} onClick={()=>{setActive("A");}}>
-                    Abhishek
-                </Link>
-                <Link href={"/assetdonation"} className={`${active=="AD"?"text-blue-500":"text-black"} flex items-center`} onClick={()=>{setActive("AD");}}>
-                    Asset Donation
-                </Link>
-                { 
-                    admin && 
-                    <Dropdown label="Analytics" dismissOnClick={true} className="bg-white text-black focus:bg-white hover:bg-white hover:cursor-pointer p-0 ms-0">
-                        <DropdownItem className="bg-gray-100 p-2">
-                            <Link href={"/donations-rituals"}> Donations & Rituals </Link>
-                        </DropdownItem>
-                        <DropdownItem className="bg-gray-100 p-2">
-                            <Link href={"/register-person"}> Register Person </Link>
-                        </DropdownItem>
-                    </Dropdown>
+                        <CustomNavDropdown label="Finance" childDropdown={true}>
+                            <CustomNavDropdownItem label="Utility Bills" href="/donation" />
+                            <CustomNavDropdownItem label="Vendors" href="/abhishek" />
+                            <CustomNavDropdownItem label="Salaries" href="/assetdonation" />
+                        </CustomNavDropdown>
+                    </CustomNavDropdown>
                 }
-                <Link href={"#"} onClick={handleLogout} className="flex items-center">
-                    Signout
-                </Link>
-            </NavbarCollapse> 
+                <ButtonComponent text={"Signout"} onClick={Logout} className={"text-sm p-1"} />
+
+            </div>
+            
         </Navbar>
       );
 }
