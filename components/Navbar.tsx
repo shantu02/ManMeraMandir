@@ -10,11 +10,10 @@ import {
     SidebarItems,
   } from "flowbite-react";
 import Image from "next/image";
-import { useState } from "react";
 import Link from "next/link";
 import Logout from "@/app/api/logout/action";
 import { useUser } from "@/context/UserRoleProvider";
-import { HiArrowSmLeft, HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser } from "react-icons/hi";
+import { HiArrowSmLeft, HiChartPie, HiInbox, HiShoppingBag, HiUser } from "react-icons/hi";
 import CustomIconColor from "./ui/CustomIconColor";
 import SidebarItemComponent from "./ui/SidebarItemComponent";
 import CustomNavDropdown from "./ui/CustomNavDropdown";
@@ -22,12 +21,9 @@ import CustomNavDropdownItem from "./ui/CustomNavDropdownItem";
 import ButtonComponent from "./ui/ButtonComponent";
 
 export default  function NavigationMenu() {
-
-    const [active, setActive] = useState<string|null>(null);
     const {admin} = useUser();
 
     const handleLogout = ()=>{
-        setActive(null);
         Logout();
     }
 
